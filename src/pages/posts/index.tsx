@@ -1,32 +1,21 @@
 import Link from "next/link";
 import { Post } from "../../../components/Post";
-
-export default function Posts({ posts }: { posts: any }) {
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+}
+export default function Posts({ posts }: { posts: Post[] }) {
   return (
     <>
       <div>Posts</div>
       <ul>
-        <li>
-          <Link href={`/posts/20`} replace>
-            Post 20
-          </Link>
-        </li>
-        <li>
-          <Link href={`/posts/70`} replace>
-            Post 70
-          </Link>
-        </li>
-        <li>
-          <Link href={`/posts/314`} replace>
-            Post 314
-          </Link>
-        </li>
-      </ul>
-      <ul>
-        {posts.map((post: any) => {
+        {posts.map((post) => {
           return (
             <li key={post.id}>
-              <Post post={post} />
+              <Link href={`/posts/${post.id}`}>
+                <Post post={post} />
+              </Link>
             </li>
           );
         })}
@@ -40,7 +29,7 @@ export async function getStaticProps() {
   const posts = await res.json();
   return {
     props: {
-      posts,
+      posts: posts.slice(0, 4),
     },
   };
 }

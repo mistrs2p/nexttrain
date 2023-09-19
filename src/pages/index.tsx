@@ -10,13 +10,14 @@ export default function Home() {
     <div>
       <h1 className={style.fontL}>My Nextjs Learning</h1>
       <Link href={"/posts"}>Posts</Link>
-      <button onClick={handleClick}>Post</button>
+      <button className="btn btn-secondary" onClick={handleClick}>
+        Post
+      </button>
       <style jsx>{`
         p {
           color: red;
         }
       `}</style>
-      <p>sadfasfkjhsalkjhsdflkj</p>
     </div>
   );
 }

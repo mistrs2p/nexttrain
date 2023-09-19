@@ -19,6 +19,6 @@ export const middleware = (request: NextRequest) => {
   return NextResponse.next();
 };
 
-export const config = {
-  matcher: ["/", "/posts/:path*"],
-};
+// export const config = {
+//   matcher: ["/", "/posts/:path*"],
+// };

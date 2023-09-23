@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import React from "react";
+import AuthContext from "../context/AuthContext";
 
 export default function Header() {
+  const { user, logout } = useContext(AuthContext);
   const router = useRouter();
   console.log(router);
   return (
@@ -36,13 +39,25 @@ export default function Header() {
               </Link>
             </li>
           </ul>
+
           <div className="d-flex">
-            <Link href={"/auth/login"} className="btn btn-sm btn-outline-secondary me-2">
-              Login
-            </Link>
-            <Link href={"/auth/register"} className="btn btn-sm btn-dark ">
-              Register
-            </Link>
+            {user ? (
+              <>
+                <span>{user.name}</span>
+                <button onClick={logout} className="btn btn-sm btn-outline-secondary ms-2">
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href={"/auth/login"} className="btn btn-sm btn-outline-secondary me-2">
+                  Login
+                </Link>
+                <Link href={"/auth/register"} className="btn btn-sm btn-dark ">
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

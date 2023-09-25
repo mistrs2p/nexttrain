@@ -7,7 +7,7 @@ import AuthContext from "../context/AuthContext";
 export default function Header() {
   const { user, logout } = useContext(AuthContext);
   const router = useRouter();
-  console.log(router);
+  // console.log(router);
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
@@ -29,12 +29,23 @@ export default function Header() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className={router.pathname == "/" ? "nav-link active" : "nav-link"} aria-current="page" href="/">
+              <Link
+                className={
+                  router.pathname == "/" ? "nav-link active" : "nav-link"
+                }
+                aria-current="page"
+                href="/"
+              >
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className={router.pathname == "/posts" ? "nav-link active" : "nav-link"} href="/posts">
+              <Link
+                className={
+                  router.pathname == "/posts" ? "nav-link active" : "nav-link"
+                }
+                href="/posts"
+              >
                 Posts
               </Link>
             </li>
@@ -44,13 +55,19 @@ export default function Header() {
             {user ? (
               <>
                 <span>{user.name}</span>
-                <button onClick={logout} className="btn btn-sm btn-outline-secondary ms-2">
+                <button
+                  onClick={logout}
+                  className="btn btn-sm btn-outline-secondary ms-2"
+                >
                   Logout
                 </button>
               </>
             ) : (
               <>
-                <Link href={"/auth/login"} className="btn btn-sm btn-outline-secondary me-2">
+                <Link
+                  href={"/auth/login"}
+                  className="btn btn-sm btn-outline-secondary me-2"
+                >
                   Login
                 </Link>
                 <Link href={"/auth/register"} className="btn btn-sm btn-dark ">

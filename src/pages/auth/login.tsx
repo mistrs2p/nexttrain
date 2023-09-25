@@ -25,23 +25,45 @@ export default function Register() {
       <div className="container">
         <div className="row justify-content-center mt-5">
           <div className="col-md-4">
+            {JSON.stringify(error)}
             <form onSubmit={handleLogin}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
                   Email address
                 </label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" id="email" />
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  className="form-control"
+                  id="email"
+                />
               </div>
               <div className="mb-3">
                 <label htmlFor="password" className="form-label">
                   Password
                 </label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control" id="password" />
+                <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  className="form-control"
+                  id="password"
+                />
               </div>
 
-              <button type="submit" disabled={loading} className="btn btn-primary">
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn btn-primary"
+              >
                 Login
-                {loading && <div className="spinner-border spinner-border-sm ms-1" role="status"></div>}
+                {loading && (
+                  <div
+                    className="spinner-border spinner-border-sm ms-1"
+                    role="status"
+                  ></div>
+                )}
               </button>
             </form>
           </div>

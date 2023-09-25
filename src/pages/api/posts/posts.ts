@@ -5,32 +5,20 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log("req", req.body);
-  if (req.method === "POST") {
+  console.log("rssggwergeq", req.cookies.token);
+  if (req.method === "GET") {
     try {
-      const resApi = await fetch("http://127.0.0.1:8000/login", {
-        method: "POST",
+      const resApi = await fetch("http://127.0.0.1:8000/blog", {
+        method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          authorization: `Bearer ${req.cookies.token}`,
         },
-        body: JSON.stringify(req.body),
       });
       const response = await resApi.json();
       if (resApi.ok) {
-        res.setHeader(
-          "Set-Cookie",
-          cookie.serialize("token", String(response.access_token), {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "development",
-            maxAge: 60 * 60 * 8, // 1 week
-            path: "/",
-          })
-        );
         res.status(200).json(response);
-        console.log("Note: ", response);
       } else {
         res.status(resApi.status).json({ message: response });
-        // console.log("Note Error: ", response);
       }
     } catch (e) {
       console.log(e);
@@ -38,7 +26,7 @@ export default async function handler(
     }
     // console.log(req.body);
   } else {
-    res.setHeader("Allow", ["POST"]);
+    res.setHeader("Allow", ["GET"]);
     res.status(405).json({ msg: `Method ${req.method} not allow` });
   }
   // res.status(200).json({ msg: "Success" });
